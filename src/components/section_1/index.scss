@@ -1,0 +1,65 @@
+.header {
+    height: 60px;
+    box-shadow: 0 2px 1px #eee;
+    .logo {
+        width: 6rem;
+    }
+}
+.content {
+    .block_left {
+        position: relative;
+        .wrapper {
+            text-align: center;
+            margin-top: 1.5rem;
+            .title {
+                font-weight: 700;
+                size: 40px;
+                line-height: 56px;
+                margin: 0;
+            }
+            .des {
+                font-weight: 300;
+                font-size: 25px;
+                color: #06BAE8;
+            }
+            .btn-dang-ky {
+                margin-top: 30px;
+                padding: .6rem 2rem;
+                font-size: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                color: #fff;
+                border-radius: 8px;
+                background-image: linear-gradient(to right, #3DFFC8,#40F6CF,#49DCE1,#57B3FF);
+            }
+            .btn-dang-ky:hover {
+                opacity: 0.9;
+            }
+        }
+        .icon_1 {
+            position: absolute;
+            left: 0;
+            top: 10rem;
+            width: 70px;
+        }
+    }
+    .block_rigth {
+        position: relative;
+        .bg-phone {
+           background-image: url('../../assets/image/bgPhone.png');
+           background-repeat: no-repeat;
+           background-size: contain;
+           img {
+               height: 320px;
+               padding-left: 20px;
+           }
+        }
+        .icon_2 {
+            position: absolute;
+            right: 10px;
+            bottom: -30px;
+            width: 100px;
+            z-index: -1;
+        }
+    }   
+}
