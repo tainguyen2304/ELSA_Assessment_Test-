@@ -89,7 +89,7 @@ function Section_2(props) {
     return (
         <div className='section_2 ' id="form-sign-up">
             <div className='py-5 row'>
-                <div className='col-6 '>
+                <div className='col-12 col-md-6 '>
                     <div className='form-sign-up'>
                         <div className='p-2 form-header'>
                             CÙNG ỨNG DỤNG ELSA
@@ -168,7 +168,7 @@ function Section_2(props) {
                         </form>
                     </div>
                 </div>
-                <div className='col-6 block_right'>
+                <div className='col-12 col-md-6 block_right'>
                     <img src={img_1} className='img_1' alt='img_1'></img>
                     <img src={img_2} className='img_2' alt='img_2'></img>
                     <img src={img_3} className='img_3' alt='img_3'></img>
