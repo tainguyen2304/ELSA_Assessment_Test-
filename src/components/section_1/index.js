@@ -13,7 +13,7 @@ function Section_1(props) {
                 </div>
             </div>
             <div className='row content'>
-                <div className='col-8 py-4 px-0 block_left'>
+                <div className='col-12 col-md-8 py-4 px-0 block_left'>
                     <img src={icon_1} alt='icon_1' className='icon_1'></img>
                     <div className='wrapper'>
                         <h2 className='title'>APP LUYỆN NÓI <br /> & GIAO TIẾP TIẾNG ANH THỜI 4.0</h2>
@@ -23,7 +23,7 @@ function Section_1(props) {
                         </a>
                     </div>
                 </div>
-                <div className='col-4 p-0 block_rigth'>
+                <div className='col-12 col-md-4 p-0 block_rigth'>
                     <img src={icon_2} alt='icon_2' className='icon_2'></img>
                     <div className='bg-phone mt-3'>
                         <img src={phone} alt='phone' className=''></img>
