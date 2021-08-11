@@ -5,22 +5,38 @@ import img_3 from '../../assets/image/vector_3.png'
 import img_4 from '../../assets/image/vector_7.png'
 import img_5 from '../../assets/image/phone_2.png'
 import img_6 from '../../assets/image/vector_6.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function Section_2(props) {
     const [email, setEmail] = useState('');
     const [userName, setUserName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [isClick, setClick] = useState(false)
-    const [isSubmit, setIsSubmit] = useState(true)
-    const [isUserName, setIsUserName] = useState(true)
-    const [isPhoneNumber, setIsPhoneisPhoneNumber] = useState(true)
-    const [isEmail, setIsEmail] = useState(true)
+    const [isSubmit, setIsSubmit] = useState(false)
+    const [isUserName, setIsUserName] = useState(false)
+    const [isPhoneNumber, setIsPhoneisPhoneNumber] = useState(false)
+    const [isEmail, setIsEmail] = useState(false)
     const [isRadio1, setIsRadio1] = useState(false)
     const [isRadio2, setIsRadio2] = useState(false)
     const tagex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     const invisible = 'invisible notice show'
     const visible = 'visible notice show'
+
+    useEffect(() => {
+        if (isEmail && isPhoneNumber && isUserName && (isRadio1 || isRadio2)) {
+            setIsSubmit(true)
+        }
+        else setIsSubmit(false)
+
+        setTimeout(() => {
+            setClick(false)
+            if (isSubmit === true) {
+                setUserName('')
+                setPhoneNumber('')
+                setEmail('')
+            }
+        }, 2000)
+    }, [isClick, isEmail, isPhoneNumber, isUserName, isRadio1, isRadio2, isSubmit])
 
     const changeEmail = (e) => {
         setEmail(e.target.value)
@@ -35,11 +51,27 @@ function Section_2(props) {
     }
 
     const checkPhoneNumber = (value) => {
-        if (value.length > 10 || !value.length) return false;
+        if (value.length !== 10) return false;
         for (let i = 0; i < value.length; i++) {
-            if (value[i] > '9' && value < '0') return false
+            if (value[i] > '9' || value < '0') return false
         }
         return true
+    }
+
+    const checkIsPhoneNumber = (value) => {
+        const unExits = checkPhoneNumber(value)
+        if (unExits) setIsPhoneisPhoneNumber(true)
+        else setIsPhoneisPhoneNumber(false)
+    }
+
+    const checkName = (value) => {
+        if (!value) setIsUserName(false)
+        else setIsUserName(true)
+    }
+
+    const checkEmail = (value) => {
+        if (tagex.test(value)) setIsEmail(true)
+        else setIsEmail(false)
     }
 
     const handleRadio_mot = (e) => {
@@ -57,33 +89,10 @@ function Section_2(props) {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        const unExits = checkPhoneNumber(phoneNumber)
-
-        if (userName) setIsUserName(true)
-        else setIsUserName(false)
-
-        if (unExits) setIsPhoneisPhoneNumber(true)
-        else setIsPhoneisPhoneNumber(false)
-
-        if (tagex.test(email)) setIsEmail(true)
-        else setIsEmail(false)
-
-        if (tagex.test(email) && unExits && userName) setIsSubmit(true)
-        else setIsSubmit(false)
-
-
+        checkIsPhoneNumber(phoneNumber)
+        checkName(userName)
+        checkEmail(email)
         setClick(true);
-        setTimeout(() => {
-            setClick(false)
-            if (isSubmit) {
-                setUserName('')
-                setPhoneNumber('')
-                setEmail('')
-            }
-            else {
-
-            }
-        }, 2000)
     }
 
     return (
@@ -103,7 +112,7 @@ function Section_2(props) {
                                     </svg>
                                     <span>Họ tên *</span>
                                 </label>
-                                <input value={userName} onChange={changeUserName} type="text" className="form-control" id="username" />
+                                <input value={userName} onChange={changeUserName} onBlur={() => checkName(userName)} type="text" className="form-control" id="username" />
                                 {!isUserName
                                     ? <div className="text-danger show">
                                         Vui lòng nhập đầy đủ họ tên!
@@ -118,7 +127,7 @@ function Section_2(props) {
                                     </svg>
                                     <span>Số điện thoại *</span>
                                 </label>
-                                <input value={phoneNumber} onChange={changePhoneNumber} type="text" className="form-control" id="phonenumber" />
+                                <input value={phoneNumber} onChange={changePhoneNumber} onBlur={() => checkIsPhoneNumber(phoneNumber)} type="text" className="form-control" id="phonenumber" />
                                 {!isPhoneNumber
                                     ? <div className="text-danger show">
                                         Vui lòng nhập số điện thoại hợp lệ!
@@ -133,7 +142,7 @@ function Section_2(props) {
                                     </svg>
                                     <span>Email *</span>
                                 </label>
-                                <input value={email} onChange={changeEmail} type="email" className="form-control" id="email" />
+                                <input value={email} onChange={changeEmail} onBlur={() => checkEmail(email)} type="email" className="form-control" id="email" />
                                 {!isEmail
                                     ? <div className="text-danger show">
                                         Vui lòng nhập Email hợp lệ!
